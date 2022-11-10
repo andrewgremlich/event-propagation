@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Event Propagation</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Event Propagation</h1>
+        </section>
+
+        <!--
+          joke intro
+
+          https://www.linkedin.com/feed/update/urn:li:activity:6995721289030115328/
+          https://media-exp1.licdn.com/dms/image/C4D22AQGzebpILsqeaA/feedshare-shrink_800/0/1630224419505?e=1671062400&v=beta&t=sX_oqF0XQCXkHmpx97SNbpaYJG9YQIy1Yx3PEZMnXqI
+          https://media-exp1.licdn.com/dms/image/C4E22AQGNL3hfY-0jlg/feedshare-shrink_800/0/1668082719083?e=1671062400&v=beta&t=2S0XYSaEdMqIM9tGmhsOaDuOZgp8vn0BiNQZd9HURD8
+        -->
+
+        <section>
+          <p>
+            JavaScript Events are a way for the web application to pay attention
+            to interesting changes.
+          </p>
+        </section>
+
+        <section>
+          <section>
+            <p>
+              Those can be clicks, mouse actions, multimedia actions, and much
+              more.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Events can be added by <code>addEventListener</code>, event
+              handler properties, or inline.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The recommended syntax to use for adding and removing event
+              listeners is with <code>addEventListener</code> and
+              <code>AbortController</code>.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Using event handler properties risks overwriting existing events.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Keeping track of event handler properties in a large web
+              application gets tricky.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Inline event handlers are not recommended because they are
+              difficult to maintain.
+            </p>
+          </section>
+          <section>
+            <p>It really helps to separate JS from HTML and CSS.</p>
+          </section>
+          <section>
+            <p>Just use <code>addEventListener</code></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <p>
+              One feature of how events function is something called event
+              propagation.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              This is a method where an event will travel through the DOM tree.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              When an event is first triggered, it will propagate differently
+              depending on the settings.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              If an event listener is added with a capture phase, then the event
+              will originate at the window and descend to the element that
+              triggered the event.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              But if an event listener has bubble phase turned on, then the
+              event will originate at the element that triggered the event and
+              ascend to the window object.
+            </p>
+          </section>
+
+          <section>
+            <p>All event handlers will run the bubble phase by default.</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Quick Note!</h2>
+          </section>
+
+          <section>
+            There are two different targets that come with event objects:
+            <code>currentTarget</code> and <code>target</code>.
+          </section>
+
+          <section>
+            <p>
+              <code>currentTarget</code> is where the event is propagating
+              <em>through.</em>
+            </p>
+          </section>
+
+          <section>
+            <p><code>target</code> is the element that triggered the event.</p>
+          </section>
+
+          <section>
+            <p>
+              With a web application that has many events, taking advantage the
+              differences between <code>currentTarget</code> and
+              <code>target</code> can be helpful.
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <p>
+              In HTML5, several elements have default actions that can be
+              prevented.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              For example, the default action of a link is to navigate to a new
+              page.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              But if you add an event listener to the link, you can prevent the
+              default action from happening.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              This is useful for when you want to add a custom action to a link
+              like opening a modal.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Another example is for when you want to prevent the default
+              behavior on a form element.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              The HTML5 form element has some functionality that is not well
+              known.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Frameworks like
+              <a href="https://angular.io/guide/forms-overview">Angular</a>
+              overhauled the default action of HTML5 forms.
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <p>You can stop the event propagation whenever you want.</p>
+          </section>
+
+          <section>
+            <p>
+              This is useful for when you want to stop the event from
+              propagating to other elements.
+            </p>
+          </section>
+
+          <section>
+            <p>
+              It is useful to stop propagation to other elements when those
+              other elements have similar event listeners.
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <img
+            src="https://miro.medium.com/max/3004/0*UIRg6zkVrwTjlzyz.png"
+            alt="A diagram to show event
+          propagation"
+          />
+        </section>
+
+        <section>
+          <section>
+            <pre><code data-trim data-noescape data-line-numbers="1|1-2|3|4">
+              domNode.addEventListener('click', (evt) => {
+                evt.preventDefault();
+              }, isBubble);
+              domNode.onClick = () => { ... }
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape data-line-numbers="1|3-5|5|7">
+              const controller = new AbortController();
+
+              btn.addEventListener('click', () => {
+                //...
+              }, { signal: controller.signal }); // pass an AbortSignal to this handler
+
+              controller.abort();
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape data-line-numbers="1-3|3-6">
+              domNode.onclick = () => {
+                console.log('this on click will never run')
+              }
+              domNode.onclick = () => { 
+                console.log('this on click will run')
+              }
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape data-line-numbers="1-22|21|2|10-19|10|11">
+              import { Component } from '@angular/core';
+              import { FormBuilder } from '@angular/forms';
+              
+              @Component({
+                selector: 'app-profile-editor',
+                templateUrl: './profile-editor.component.html',
+                styleUrls: ['./profile-editor.component.css']
+              })
+              export class ProfileEditorComponent {
+                profileForm = this.fb.group({
+                  firstName: ['', Validators.required],
+                  lastName: [''],
+                  address: this.fb.group({
+                    street: [''],
+                    city: [''],
+                    state: [''],
+                    zip: ['']
+                  }),
+                });
+              
+                constructor(private fb: FormBuilder) { }
+              }
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <p>Demo!</p>
+          <p>
+            <a
+              href="https://codesandbox.io/s/event-propagation-wvd5xk?file=/src/index.js"
+              target="_blank"
+              >CodeSandbox</a
+            >
+          </p>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events"
+                >Creating and Triggering Events</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.tutorialrepublic.com/javascript-tutorial/javascript-event-propagation.php"
+                >JS Event Propagation</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events"
+                >MDN: Building Blocks - Events</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.tutorialspoint.com/javascript/javascript_events.htm"
+                >Just some more event types.</a
+              >
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
